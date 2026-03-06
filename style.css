@@ -11,32 +11,152 @@
     --dark:   #2C1A1A;
 }
 
-.dark-mode-btn {
+/* ---- SETTINGS PANEL ---- */
+.settings-toggle {
+    position: fixed;
+    left: 14px;
+    top: 14px;
+    z-index: 2000;
+    background: var(--maroon);
+    border: none;
+    color: #fff;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    transition: background 0.2s, transform 0.3s;
+}
+.settings-toggle:hover { background: var(--gold); }
+.settings-toggle.open { transform: rotate(60deg); }
+
+.settings-panel {
+    position: fixed;
+    left: 14px;
+    top: 66px;
+    transform: scaleY(0);
+    transform-origin: top center;
+    z-index: 1999;
     background: var(--cream);
     border: 2px solid var(--gold);
+    border-radius: 16px;
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 170px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), opacity 0.2s;
+}
+.settings-panel.open {
+    transform: scaleY(1);
+    opacity: 1;
+    pointer-events: all;
+}
+.settings-label {
+    font-size: 0.78rem;
+    font-weight: bold;
     color: var(--maroon);
-    padding: 8px 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+}
+.settings-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Dark mode toggle switch */
+.toggle-switch {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+}
+.toggle-switch input { display: none; }
+.toggle-track {
+    position: absolute;
+    inset: 0;
+    background: #ccc;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background 0.25s;
+}
+.toggle-track::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 3px;
+    top: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.25s;
+}
+.toggle-switch input:checked + .toggle-track { background: var(--maroon); }
+.toggle-switch input:checked + .toggle-track::after { transform: translateX(20px); }
+
+.settings-row span { font-size: 0.92rem; color: var(--dark); }
+
+/* Font size control */
+.font-ctrl {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.font-ctrl-btn {
+    background: var(--maroon);
+    color: #fff;
+    border: none;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     cursor: pointer;
     font-size: 18px;
-    transition: all 0.3s;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 1000;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    line-height: 1;
+    flex-shrink: 0;
 }
-
-.dark-mode-btn:hover {
-    background: var(--gold);
-    color: var(--maroon);
+.font-ctrl-btn:hover { background: var(--gold); }
+.font-ctrl-btn:disabled { background: #ccc; cursor: not-allowed; }
+.font-size-indicator {
+    font-size: 0.85rem;
+    color: var(--dark);
+    min-width: 38px;
+    text-align: center;
+    font-weight: bold;
 }
 
 body.dark {
-    --maroon: #8B3A4A;
-    --cream:  #1A1A1A;
-    --gold:   #D4AF37;
-    --dark:   #F5F5F5;
+    --maroon: #C4566A;
+    --cream:  #0A0A0A;
+    --gold:   #E0BC4A;
+    --dark:   #EAEAEA;
 }
+
+body.dark header         { background: #111; }
+body.dark .facility-card,
+body.dark .package-box,
+body.dark .about-card,
+body.dark .detail-desc,
+body.dark .features-list li { background: #161616; border-color: #2a2a2a; }
+body.dark .contact-section  { background: #0d0d0d; }
+body.dark #contact-form input,
+body.dark #contact-form textarea { background: #161616; border-color: #333; color: #eee; }
+body.dark footer            { background: #000; }
+body.dark .package-note     { background: #111; border-color: var(--gold); }
+body.dark .package-box ul li { border-color: #2a2a2a; }
 
 body {
     font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
